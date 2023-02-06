@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld :todos="todos"/>
+	<h1>{{ text }}</h1>
+	<input v-model="text" type="text">
+	<button @click="addToNames">Enviar</button>
   </div>
 </template>
-
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 
@@ -12,6 +14,24 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  data(){
+	return{
+		text:"",
+		ids:0,
+		todos:[
+			{
+				id: this.ids,
+				task: "Hacer la cama"
+			}
+		]
+	}
+  },
+  methods:{
+	addToNames(){
+		this.names.push(this.text)
+		this.text = ""
+	}
   }
 }
 </script>
