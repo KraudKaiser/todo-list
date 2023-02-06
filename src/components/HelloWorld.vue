@@ -1,13 +1,11 @@
 <template>
   <div class="hello">
-    <div v-bind:key="element.id" v-for="element in todos" class="todo-list" ref="todoDiv">
+    <div v-bind:key="element.id" v-for="element in todos" class="todo-list" >
 		<h1 >{{ element.task}}</h1>
-		<input type="text" ref="textInput">
-		<button @click="changeText">Editar</button>
-		<Button >Borrar</Button>
-		</div>
-	
-	<button>Borrar</button>
+		<input @change="changeText" type="text" >
+		<button @click="sendText(element)">Editar</button>
+		<Button @click="deleteText(element)">Borrar</Button>
+	</div>
   </div>
 </template>
 
@@ -16,15 +14,19 @@ export default {
   name: 'HelloWorld',
   data(){
 	return{
-		text:"hola"
+		text:""
 	}
   },
   methods:{
-	changeText(){
-		let textInput = this.$refs.textInput
-		this.text = textInput.value
-		this.$emit("inputChange", textInput.value, this.$refs.todoDiv.index)
-		textInput.value= ""
+	changeText(event){
+		this.text = event.target.value
+	},
+	sendText(element){
+		this.$emit("inputChange", this.text ,element)
+		this.text = ""
+	},
+	deleteText(element){
+		this.$emit("deleteText", element)
 	}
   },
   props:{
