@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld :todos="todos"/>
+    <HelloWorld :todos="todos" v-on:inputChange="childMessageReceived" />
 	<h1>{{ text }}</h1>
 	<input v-model="text" type="text">
 	<button @click="addToNames">Enviar</button>
@@ -21,9 +21,13 @@ export default {
 		ids:0,
 		todos:[
 			{
-				id: this.ids,
+				id: 0,
 				task: "Hacer la cama"
-			}
+			},
+			{
+				id: 1,
+				task: "limpiar la mesa"
+			},
 		]
 	}
   },
@@ -31,6 +35,9 @@ export default {
 	addToNames(){
 		this.names.push(this.text)
 		this.text = ""
+	},
+	childMessageReceived(text, index){
+		console.log(text, index)
 	}
   }
 }

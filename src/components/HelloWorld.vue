@@ -1,10 +1,11 @@
 <template>
   <div class="hello">
-    <div class="todo-list">
-		<h1 v-bind:key="todo.id" v-for="todo in todos">{{ todo.task }}</h1>
+    <div v-bind:key="element.id" v-for="element in todos" class="todo-list" ref="todoDiv">
+		<h1 >{{ element.task}}</h1>
 		<input type="text" ref="textInput">
 		<button @click="changeText">Editar</button>
 		<Button >Borrar</Button>
+		<Button @click="sendMessageToParent">enviar mensajito lindo</Button>
 	</div>
 	
 	<button>Borrar</button>
@@ -23,7 +24,10 @@ export default {
 	changeText(){
 		let textInput = this.$refs.textInput
 		this.text = textInput.value
+		this.$emit("inputChange", textInput.value, this.$refs.todoDiv.index)
 		textInput.value= ""
+	},
+	sendMessageToParent(){
 	}
   },
   props:{
