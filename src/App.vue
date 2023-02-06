@@ -1,19 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld :todos="todos" v-on:inputChange="changeTaskText" 	v-on:deleteText="deleteTask"/>
-	<h1>{{ text }}</h1>
+	<img alt="Vue logo" src="./assets/logo.png">
+	<h1>Bienvenido a la aplicacion de lista de Tareas sencilla con Vue JS</h1>
+    <todo-list :todos="todos" v-on:inputChange="changeTaskText" 	v-on:deleteText="deleteTask"/>
+	<h2>Puedes ingresar una nueva tarea. Escribela abajo y haz click en enviar</h2>
 	<input v-model="text" type="text">
 	<button @click="addToNames">Enviar</button>
   </div>
 </template>
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TodoList from './components/TodoList.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+	TodoList
   },
   data(){
 	return{

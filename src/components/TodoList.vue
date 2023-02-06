@@ -2,7 +2,7 @@
   <div class="hello">
     <div v-bind:key="element.id" v-for="element in todos" class="todo-list" >
 		<h1 >{{ element.task}}</h1>
-		<input @change="changeText" type="text" >
+		<input @change="changeText" type="text" placeholder="ingresa el texto nuevo" >
 		<button @click="sendText(element)">Editar</button>
 		<Button @click="deleteText(element)">Borrar</Button>
 	</div>
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'TodoList',
   data(){
 	return{
 		text:""
@@ -60,5 +60,7 @@ a {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	padding:1em;
+	gap:0.5em;
 }
 </style>
