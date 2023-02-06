@@ -5,8 +5,7 @@
 		<input type="text" ref="textInput">
 		<button @click="changeText">Editar</button>
 		<Button >Borrar</Button>
-		<Button @click="sendMessageToParent">enviar mensajito lindo</Button>
-	</div>
+		</div>
 	
 	<button>Borrar</button>
   </div>
@@ -26,8 +25,6 @@ export default {
 		this.text = textInput.value
 		this.$emit("inputChange", textInput.value, this.$refs.todoDiv.index)
 		textInput.value= ""
-	},
-	sendMessageToParent(){
 	}
   },
   props:{
