@@ -2,19 +2,19 @@
   <div id="app">
 	<img alt="Vue logo" src="./assets/logo.png">
 	<h1>Bienvenido a la aplicacion de lista de Tareas sencilla con Vue JS</h1>
-    <todo-list :todos="todos" v-on:sendTaskChange="changeTaskText" 	v-on:deleteText="deleteTask"/>
+    <show-task :todos="todos" v-on:sendTaskChange="changeTaskText" 	v-on:deleteText="deleteTask"/>
 	<h2>Puedes ingresar una nueva tarea. Escribela abajo y haz click en enviar</h2>
-	<input v-model="text" type="text">
-	<button @click="addToNames">Enviar</button>
+	<create-task v-on:sendCreateTask="createTask" />	
   </div>
 </template>
 <script>
-import TodoList from './components/TodoList.vue'
-
+import ShowTask from './components/ShowTask.vue'
+import CreateTask from "./components/CreateTask.vue"
 export default {
   name: 'App',
   components: {
-	TodoList
+	ShowTask,
+	CreateTask
   },
   data(){
 	return{
@@ -32,23 +32,21 @@ export default {
 	}
   },
   methods:{
-	addToNames(){
+	createTask(text){
 		if(this.todos.length == 0){
 			let obj = {
 				id: 0,
-				task: this.text
+				task: text
 			}
 			this.todos.push(obj)
-			this.text = ""
 		}else{
 
 			let lastId = this.todos[this.todos.length - 1].id + 1
 			let obj = {
 				id:lastId,
-				task:this.text
+				task:text
 			}
 			this.todos.push(obj)
-			this.text = ""
 		}
 		},
 	changeTaskText(text, element){
