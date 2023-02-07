@@ -2,7 +2,7 @@
   <div id="app">
 	<img alt="Vue logo" src="./assets/logo.png">
 	<h1>Bienvenido a la aplicacion de lista de Tareas sencilla con Vue JS</h1>
-    <todo-list :todos="todos" v-on:inputChange="changeTaskText" 	v-on:deleteText="deleteTask"/>
+    <todo-list :todos="todos" v-on:sendTaskChange="changeTaskText" 	v-on:deleteText="deleteTask"/>
 	<h2>Puedes ingresar una nueva tarea. Escribela abajo y haz click en enviar</h2>
 	<input v-model="text" type="text">
 	<button @click="addToNames">Enviar</button>
@@ -52,6 +52,7 @@ export default {
 		}
 		},
 	changeTaskText(text, element){
+		console.log("hola")
 		let elemento = this.todos.findIndex(result => result.id == element.id)
 		this.todos[elemento].task = text
 	},

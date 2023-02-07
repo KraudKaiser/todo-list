@@ -2,33 +2,29 @@
   <div class="hello">
     <div v-bind:key="element.id" v-for="element in todos" class="todo-list" >
 		<h1 >{{ element.task}}</h1>
-		<input @change="changeText" type="text" placeholder="ingresa el texto nuevo" >
-		<button @click="sendText(element)">Editar</button>
-		<Button @click="deleteText(element)">Borrar</Button>
+		<edit-text :element="element" v-on:inputChange="sendTaskChange"/>
+		<delete-text :element="element" v-on:sendDeleteTask="deleteText" />
 	</div>
   </div>
 </template>
 
 <script>
+import EditText from "./EditText.vue"
+import DeleteText from "./DeleteText.vue"
 export default {
   name: 'TodoList',
-  data(){
-	return{
-		text:""
-	}
+  components:{
+	EditText,
+	DeleteText
   },
   methods:{
-	changeText(event){
-		this.text = event.target.value
-	},
-	sendText(element){
-		this.$emit("inputChange", this.text ,element)
-		this.text = ""
-	},
 	deleteText(element){
 		this.$emit("deleteText", element)
+	},
+	sendTaskChange(text, element){
+		this.$emit("sendTaskChange", text, element)
 	}
-  },
+	},
   props:{
 	todos:[]
   }
@@ -60,6 +56,7 @@ a {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	align-items: center;
 	padding:1em;
 	gap:0.5em;
 }
